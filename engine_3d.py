@@ -118,6 +118,6 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python engine_3d.py <image_path> [output.obj]")
         sys.exit(1)
-    engine = Engine3D(max_height=0.28, max_faces=12000)
+    engine = Engine3D()
     out_path = sys.argv[2] if len(sys.argv) > 2 else "public/models/3d_object.obj"
     engine.process(sys.argv[1], out_path)
