@@ -11,15 +11,15 @@ UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return render_template("index.html")
 
 @app.route('/process', methods=['POST'])
 def process_image():
     if 'image' not in request.files:
-        return jsonify({'error': 'No image file'}), 400
+        return render_template("index.html")
     file = request.files['image']
     if file.filename == '' or not allowed_file(file.filename):
-        return jsonify({'error': 'Invalid file'}), 400
+        return render_template("index.html")
 
     filename = secure_filename(file.filename)
     temp_input = os.path.join(UPLOAD_FOLDER, f"{uuid.uuid4()}_{filename}")
@@ -31,10 +31,10 @@ def process_image():
     try:
         success, result = engine.process(temp_input, temp_output)
         if not success:
-            return jsonify({'error': 'Processing failed'}), 500
-        return send_file(temp_output, as_attachment=True, download_name='model.obj')
+            return render_template("index.html")
+        return render_template("index.html")
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return render_template("index.html")
     finally:
         if os.path.exists(temp_input):
             os.remove(temp_input)
@@ -43,7 +43,7 @@ def process_image():
 
 @app.route('/health', methods=['GET'])
 def health():
-    return jsonify({'status': 'ok'})
+    return render_template("index.html")
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
