@@ -72,3 +72,8 @@ MIT License
   <sub>ساخته شده با ❤️ توسط تیم TetraShop</sub>
 </div>
 <!-- Trigger deploy: Mon Aug 17 01:49:03 +0330 2026 -->
+
+## 🌐 دیپلوی
+
+- **URL:** [https://railway-service.vercel.app](https://railway-service.vercel.app)
+- **وضعیت:** ✅ فعال
